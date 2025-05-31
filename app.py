@@ -41,34 +41,34 @@ def editar(id):
     empleado = Empleado.query.get_or_404(id)
 
     if request.method == 'POST':
-        empleado.nombre = request.form['nombre']
-        empleado.salario = float(request.form['salario'])
+        nombre = request.form['nombre']
+        salario = float(request.form['salario'])
         tipo = request.form['tipo']
 
-        # Cambiar el tipo de empleado si es necesario
-        if tipo == 'desarrollador' and empleado.tipo != 'desarrollador':
-            nuevo = Desarrollador(id=empleado.id, nombre=empleado.nombre, salario=empleado.salario, lenguaje="Python")
+        try:
+            # Eliminar el objeto anterior
             db.session.delete(empleado)
-            db.session.add(nuevo)
-            empleado = nuevo
-        elif tipo == 'gerente' and empleado.tipo != 'gerente':
-            nuevo = Gerente(id=empleado.id, nombre=empleado.nombre, salario=empleado.salario, departamento="Ventas")
-            db.session.delete(empleado)
-            db.session.add(nuevo)
-            empleado = nuevo
-        elif tipo == 'empleado' and empleado.tipo != 'empleado':
-            nuevo = Empleado(id=empleado.id, nombre=empleado.nombre, salario=empleado.salario)
-            db.session.delete(empleado)
-            db.session.add(nuevo)
-            empleado = nuevo
+            db.session.flush()  # Libera el ID para reusar
 
-        empleado.nombre = request.form['nombre']
-        empleado.salario = float(request.form['salario'])
+            # Crear una nueva instancia según el tipo seleccionado
+            if tipo == 'desarrollador':
+                nuevo = Desarrollador(id=id, nombre=nombre, salario=salario, lenguaje="Python")
+            elif tipo == 'gerente':
+                nuevo = Gerente(id=id, nombre=nombre, salario=salario, departamento="Ventas")
+            else:  # tipo == 'empleado'
+                nuevo = Empleado(id=id, nombre=nombre, salario=salario)
 
-        db.session.commit()
-        return redirect(url_for('index'))
+            db.session.add(nuevo)
+            db.session.commit()
+            return redirect(url_for('index'))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error al editar empleado: {str(e)}", "danger")
+            return redirect(url_for('editar', id=id))
 
     return render_template('editar.html', empleado=empleado)
+
 
 
 @app.route('/eliminar/<int:id>', methods=['POST'])
