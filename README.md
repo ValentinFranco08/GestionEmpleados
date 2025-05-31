@@ -8,25 +8,40 @@ Este proyecto es una aplicación web desarrollada con **Flask** y **Bootstrap 5*
 
 ---
 
-## ✨ Funcionalidades principales
+### 👥 Gestión de Empleados
+- 🆕 Registro de nuevos empleados con diferentes roles
+- ✏️ Edición completa de información
+- 🗑️ Eliminación segura con confirmación
+  
 
-* ✅ Alta de empleados
-* ✏️ Edición de datos y cambio de tipo de empleado
-* 🗑️ Eliminación de empleados
-* 🌙 Modo oscuro habilitable desde la interfaz
-* 📱 Interfaz responsive y moderna con Bootstrap 5
+### 🎨 Interfaz Moderna
+- 🌙/☀️ Modo oscuro/claro persistente
+- 📱 Diseño 100% responsive
+- 🎨 UI intuitiva con Bootstrap 5
+- 📊 Visualización de estadísticas
+
+### ⚙️ Funcionalidades Técnicas
+- 🗄️ Base de datos SQLite
+- ⚡ ORM con SQLAlchemy
 
 ---
 
-## ⚙️ Tecnologías usadas
+## 🛠️ Tecnologías Utilizadas
 
-* Python 3.x
-* Flask
-* SQLite
-* SQLAlchemy
-* Bootstrap 5
-* HTML5 & CSS3
+### Backend
+- **Python 3.10+**
+- **Flask 2.3.x** - Microframework web
+- **SQLAlchemy 2.0** - ORM para base de datos
+  
 
+### Frontend
+- **Bootstrap 5.3** - Diseño responsive
+- **Bootstrap Icons** - Librería de iconos
+- **Vanilla JavaScript** - Interactividad
+- **CSS3** - Estilos personalizados
+
+### Base de Datos
+- **SQLite** - Base de datos embebida
 ---
 
 ## 🛠️ Requisitos previos
